@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"database/sql" // Допустим что query используется в plain sql, а не в ORM
+	"database/sql" // Используется только для использования ошибки sql.ErrNoRows
 	"runtime"
 	"sync"
 )
@@ -71,7 +71,7 @@ func MultiSearch(ctx context.Context, query string, sfs []SearchFunc) (Result, e
 
                 // !! Тут я беру за данное, то что не найдя строк внешний ресурс даст ошибку! Если этого
                 // не происходит - надо проверять на наличие строк в Result.Rows. Процесс будет зависеть от 
-                // конкретного ресурса, но в общем процесс такой
+                // конкретного ресурса, но в общем процесс такой.
 
                 errWrite(errVal, err) // пишем значение ошибки в переменную с мьютексом
                 
